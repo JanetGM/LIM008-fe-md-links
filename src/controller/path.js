@@ -1,10 +1,20 @@
+/**
+ * Verifica si la ruta existe 
+ * @param {ruta relativa} pathsRelative 
+ * @returns un array con las rutas convertidas a absolutas
+ */
+export const convertPathRelToAbs  = (pathRelative) => {
+    return [];
+} 
+
+/** */
 
 /**
  * Obtienes las propiedades de los links dentro de los documentos MD
  * @param {rutas a archivos MD} pathsMdArr
  * @returns un array de objetos que contienene las propiedades de los links: path, href, title, text
  */
-export const getPropertiesOfDocumentMd = (pathsMdArr) =>{
+export const getPropertiesOfDocumentMd = (pathsMdArr) => {
     return [];
 }
 
