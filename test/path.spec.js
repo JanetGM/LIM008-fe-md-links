@@ -16,6 +16,7 @@ describe('runInDirectory',() => {
         expect(pathsArr.length).toBe(1);
         expect(pathsArr.includes('./testFolder/folder1/folder1a/file1.md')).toBe(true);
     });
+    
 });
 describe('filterPathWithExtensionMd',() => {
     it('debería ser una función', () => {
