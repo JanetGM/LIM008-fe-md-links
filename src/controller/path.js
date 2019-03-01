@@ -36,17 +36,22 @@ export const convertPathRelToAbs  = (pathRelative) => {
 // export const getPropertiesOfDocumentMd = (pathsMdArr) => {
 //     return [];
 // }
-export const recorrerDirectorio = (pathToWalk) => {
+export const travelDirectory = (pathToWalk) => {
     let arrFileName = [];
     const readDirectory = fs.readdirSync(pathToWalk);
-    readDirectory.forEach((filesName) =>{
+    readDirectory.forEach((filesName) => {
         const absFileName = path.join(pathToWalk,filesName);
         const statss = fs.statSync(absFileName)
-        console.log(statss)
-    } 
-    )
+            if(statss.isDirectory()){
+                arrFileName = arrFileName.concat(travelDirectory(absFileName));
+            }else{
+                arrFileName.push(filesName)
+            }
+        });
+ 
+    return arrFileName;
 }
-console.log(recorrerDirectorio('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test'));
+console.log(recorrerDirectorio('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder'));
 /**
  * Filtra las rutas pasadas como parametros,
  * quedándose solamente con aquellas que son MD
