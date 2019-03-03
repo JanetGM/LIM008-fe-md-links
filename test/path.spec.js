@@ -1,4 +1,4 @@
-import {readDirectory,filterPathWithExtensionMd,getPropertiesOfDocumentMd,convertPathRelToAbs, concatPath} from '../src/controller/path.js';
+import {readDirectory,filterPathWithExtensionMd,getPropertiesOfDocumentMd,convertPathRelToAbs, concatPath, travelDirectory} from '../src/controller/path.js';
 
 describe('convertPathRelToAbs',() => {
    it('debería ser una función',() => {
@@ -68,6 +68,14 @@ describe('concatPath',() => {
     })
     it('debería concatenar el nombre del archivo con su ruta abs' , () => {
         expect(concatPath('options.js')).toEqual('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\src\\controller\\options.js');
+    })
+})
+describe('travelDirectory',() => {
+    it('debería ser una función',() => {
+        expect(typeof travelDirectory).toBe('function')
+    })
+    it('deberia retornar todos los archivos' , () =>{
+        expect(travelDirectory('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder')).toEqual([ 'file1.md', 'file2.txt', 'filed3.js' ]);
     })
 })
 // describe('getPropertiesOfDocumentMd',() => {

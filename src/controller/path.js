@@ -11,31 +11,7 @@ export const convertPathRelToAbs  = (pathRelative) => {
     const absoluta = path.resolve(pathRelative);
     return absoluta;
 } 
-/**
- * Recorre todo la ruta que uno le ingresa de manera recursiva
- * 
- * @param {ruta a recorrer} pathToWalk
- * @returns Array de todas las rutas absolutas, dentro del directorio 
- */
-// export const readDirectory = (pathToWalk) => {
-//     return new Promise ((resolve, reject) => {
-//         fs.readdir(pathToWalk, (error, fileList) => {
-//             if(error){
-//                 reject(error)
-//             }
-//             resolve(fileList)});
-//     })
-//     }
 
-/** */
-/**
- * Obtienes las propiedades de los links dentro de los documentos MD
- * @param {rutas a archivos MD} pathsMdArr
- * @returns un array de objetos que contienene las propiedades de los links: path, href, title, text
- */
-// export const getPropertiesOfDocumentMd = (pathsMdArr) => {
-//     return [];
-// }
 export const travelDirectory = (pathToWalk) => {
     let arrFileName = [];
     const readDirectory = fs.readdirSync(pathToWalk);
@@ -49,9 +25,8 @@ export const travelDirectory = (pathToWalk) => {
             }
         });
  
-    return arrFileName;
+    return filtrandoArchivos;
 }
-console.log(recorrerDirectorio('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder'));
 /**
  * Filtra las rutas pasadas como parametros,
  * quedándose solamente con aquellas que son MD
@@ -65,5 +40,28 @@ export const filterPathWithExtensionMd = (pathArr) => {
 export const concatPath = (fileName) => {
     return path.join(__dirname,fileName)
 }
+/** */
+/**
+ * Obtienes las propiedades de los links dentro de los documentos MD
+ * @param {rutas a archivos MD} pathsMdArr
+ * @returns un array de objetos que contienene las propiedades de los links: path, href, title, text
+ */
+// export const getPropertiesOfDocumentMd = (pathsMdArr) => {
+//     const filterMdDoc = filterPathWithExtensionMd(pathsMdArr)
+//     return filterMdDoc;
+// // }
+// console.log(getPropertiesOfDocumentMd('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\file1.md'));
+export const getPropertiesOfDocumentMd = (pathsMdArr) => {
+    const obj = []
+    const filterMdDoc = filterPathWithExtensionMd(pathsMdArr)
+    let texto = fs.readFileSync(pathsMdArr, 'utf-8');
+    const reg = /((^|[^!])\[(.*)\])\S+/gm;
+    let resultadoReg = texto.match(reg)
+    resultadoReg.forEach(e => {
+     const textLink = e
+     obj.push(textLink)
+    })    
+    return obj ;
+}
 
-
+console.log(getPropertiesOfDocumentMd('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\file1.md'));
