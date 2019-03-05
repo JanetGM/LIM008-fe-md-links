@@ -9,36 +9,6 @@ describe('convertPathRelToAbs',() => {
    });
 });
 
-// describe('readDirectory',() => {
-//     it('debería ser una función', () => {
-//         expect(typeof readDirectory).toBe('function');
-//     });
-//     it('debería recorrer un directory y devolver todas las rutas de los archivos', (done) => {
-//         readDirectory('test\\testFolder')
-//         .then((isCorrect)=> {
-//             expect(isCorrect.length).toBe(2);
-//             done();
-//         })
-//         .catch((error) => {
-//             console.log(error)
-//             done();
-//         })
-//     });
-//     it('debería recorrer un directory y devolver todas las rutas del contenido', (done) => {
-//         readDirectory('test\testFolder')
-//         .then((isCorrect)=> {
-//             expect(isCorrect.length).toBe(2);    
-//             done();
-//         })
-//         .catch((error) => {
-//             // console.log(error)
-//             done();
-//         })
-//     });
-// });
-        // const pathsArr = readDirectory('./testFolder');
-        
-       
     // it('debería recorrer un directory y devolver todas las rutas de los archivos', () => {
     //     const pathsArr = readDirectory('./testFolder/folder1');
     //     expect(pathsArr.length).toBe(1);
@@ -75,14 +45,27 @@ describe('travelDirectory',() => {
         expect(typeof travelDirectory).toBe('function')
     })
     it('deberia retornar todos los archivos' , () =>{
-        expect(travelDirectory('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder')).toEqual([ 'file1.md', 'file2.txt', 'filed3.js' ]);
+        expect(travelDirectory(
+            'C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder')).toEqual([ 
+                "C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\file1.md",
+                "C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder2\\folder2a\\file2.txt",
+                "C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder2\\folder2a\\jared.md",
+                "C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder2\\folder2b\\filed3.js",
+                "C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\sisi.md"]);
     })
 })
-// describe('getPropertiesOfDocumentMd',() => {
-//     it('debería ser una función', () => {
-//         expect(typeof getPropertiesOfDocumentMd).toBe('function');
-//     });
-//     it('debería un array de objetos que contienene las propiedades de los links',() => {
-//         expect(getPropertiesOfDocumentMd('test\testFolder\folder1\folder1a')).toBe([])
-//     })
-// });
+describe('getPropertiesOfDocumentMd',() => {
+    it('debería ser una función', () => {
+        expect(typeof getPropertiesOfDocumentMd).toBe('function');
+    });
+    it('debería un array de objetos que contienene las propiedades de los links',() => {
+        expect(getPropertiesOfDocumentMd('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a')).toEqual(
+        [{  root:'C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\file1.md',
+            title:
+            [ '[texto link1]',
+            '[texto link2]',
+            '[texto link3]',
+            '[texto link4]' ],
+            links: [ '(link1)', '(link2)', '(link3)', '(link4)' ] } ])
+    })
+});

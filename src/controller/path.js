@@ -1,4 +1,3 @@
-import { read } from 'fs';
 
 const path = require('path')
 const fs = require('fs')
@@ -21,12 +20,13 @@ export const travelDirectory = (pathToWalk) => {
             if(statss.isDirectory()){
                 arrFileName = arrFileName.concat(travelDirectory(absFileName));
             }else{
-                arrFileName.push(filesName)
+                arrFileName.push(absFileName)
             }
         });
  
-    return filtrandoArchivos;
+    return arrFileName;
 }
+console.log(travelDirectory('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\src\\controller'));
 /**
  * Filtra las rutas pasadas como parametros,
  * quedándose solamente con aquellas que son MD
@@ -46,22 +46,32 @@ export const concatPath = (fileName) => {
  * @param {rutas a archivos MD} pathsMdArr
  * @returns un array de objetos que contienene las propiedades de los links: path, href, title, text
  */
-// export const getPropertiesOfDocumentMd = (pathsMdArr) => {
-//     const filterMdDoc = filterPathWithExtensionMd(pathsMdArr)
-//     return filterMdDoc;
-// // }
-// console.log(getPropertiesOfDocumentMd('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\file1.md'));
 export const getPropertiesOfDocumentMd = (pathsMdArr) => {
-    const obj = []
-    const filterMdDoc = filterPathWithExtensionMd(pathsMdArr)
-    let texto = fs.readFileSync(pathsMdArr, 'utf-8');
-    const reg = /((^|[^!])\[(.*)\])\S+/gm;
-    let resultadoReg = texto.match(reg)
-    resultadoReg.forEach(e => {
-     const textLink = e
-     obj.push(textLink)
-    })    
-    return obj ;
+    const arrFileName = travelDirectory(pathsMdArr)
+    const arrFilterFiles = filterPathWithExtensionMd(arrFileName)
+    let reg = /((^|[^!])\[(.*)\])\S+/gm;
+    let obj = [];
+    const expRegtitle = /\[((.*))\]/gm;
+    const hlinks = /\((.*)\)/gm;
+    arrFilterFiles.forEach(pathFile => {
+        let getTexto = fs.readFileSync(pathFile, 'utf-8');
+        let resultadoReg = getTexto.match(reg).toString();
+        let getTitle = resultadoReg.match(expRegtitle).toString();
+        let hlink = resultadoReg.match(hlinks).toString();
+        const arrTitle = getTitle.split(',')
+        const arrHlink = hlink.split(',')
+        console.log(arrHlink);
+        arrTitle.forEach((e,i)=>
+            obj.push(
+                {
+                    root : pathFile,
+                    title :arrTitle[i].substring(1,arrTitle[i].length-2),
+                    href:arrHlink[i].substring(1,arrHlink[i].length-2)
+                }
+            )
+        )
+       
+    })
+return obj
 }
-
-console.log(getPropertiesOfDocumentMd('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\file1.md'));
+console.log(getPropertiesOfDocumentMd('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a'));
