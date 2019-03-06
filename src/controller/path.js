@@ -26,7 +26,7 @@ export const travelDirectory = (pathToWalk) => {
  
     return arrFileName;
 }
-console.log(travelDirectory('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\src\\controller'));
+
 /**
  * Filtra las rutas pasadas como parametros,
  * quedándose solamente con aquellas que son MD
@@ -60,13 +60,12 @@ export const getPropertiesOfDocumentMd = (pathsMdArr) => {
         let hlink = resultadoReg.match(hlinks).toString();
         const arrTitle = getTitle.split(',')
         const arrHlink = hlink.split(',')
-        console.log(arrHlink);
         arrTitle.forEach((e,i)=>
             obj.push(
                 {
-                    root : pathFile,
-                    title :arrTitle[i].substring(1,arrTitle[i].length-2),
-                    href:arrHlink[i].substring(1,arrHlink[i].length-2)
+                    href:arrHlink[i].substring(1,arrHlink[i].length-1),
+                    text :arrTitle[i].substring(1,arrTitle[i].length-1),
+                    file : pathFile                    
                 }
             )
         )
@@ -74,4 +73,3 @@ export const getPropertiesOfDocumentMd = (pathsMdArr) => {
     })
 return obj
 }
-console.log(getPropertiesOfDocumentMd('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a'));

@@ -24,5 +24,12 @@
     "eslint-plugin-jest": "^22.1.2",
     "jest": "^24.1.0",
     "regenerator-runtime": "^0.13.1"
+  },
+  "dependencies": {
+    "fetch-plugin": "^1.2.5",
+    "node-fetch": "^2.3.0",
+    "url-search-params-polyfill": "^5.0.0",
+    "url-to-options": "^1.0.1",
+    "whatwg-fetch": "^3.0.0"
   }
 }
