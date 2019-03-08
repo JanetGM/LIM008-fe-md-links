@@ -1,5 +1,6 @@
 import {readDirectory,filterPathWithExtensionMd,getPropertiesOfDocumentMd,convertPathRelToAbs, concatPath, travelDirectory} from '../src/controller/path.js';
-
+import {validate,statLinksBroken,statLinks,statLinksUnique}from '../src/controller/options.js';
+import { resolve } from 'path';
 describe('convertPathRelToAbs',() => {
    it('debería ser una función',() => {
     expect(typeof convertPathRelToAbs).toBe('function')
@@ -8,13 +9,6 @@ describe('convertPathRelToAbs',() => {
        expect(convertPathRelToAbs('test\\testFolder\\folder1\\folder1a\\file1.md')).toEqual('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\file1.md');
    });
 });
-
-    // it('debería recorrer un directory y devolver todas las rutas de los archivos', () => {
-    //     const pathsArr = readDirectory('./testFolder/folder1');
-    //     expect(pathsArr.length).toBe(1);
-    //     expect(pathsArr.includes('./testFolder/folder1/folder1a/file1.md')).toBe(true);
-    // });
-
 
 describe('filterPathWithExtensionMd',() => {
     it('debería ser una función', () => {
@@ -32,14 +26,6 @@ describe('filterPathWithExtensionMd',() => {
         expect(pathsArr.includes('./testFolder/folder1/folder1a/file1.md')).toBe(true);
     });
 });
-describe('concatPath',() => {
-    it('debería ser una función' , () => {
-        expect(typeof concatPath).toBe('function');
-    })
-    it('debería concatenar el nombre del archivo con su ruta abs' , () => {
-        expect(concatPath('options.js')).toEqual('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\src\\controller\\options.js');
-    })
-})
 describe('travelDirectory',() => {
     it('debería ser una función',() => {
         expect(typeof travelDirectory).toBe('function')
@@ -61,20 +47,62 @@ describe('getPropertiesOfDocumentMd',() => {
     });
     it('debería un array de objetos que contienene las propiedades de los links',() => {
         expect(getPropertiesOfDocumentMd('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a')).toEqual(
-            [ { href: 'link1',
-            text: 'texto link1',
-            file: 'C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\file1.md' },
-          { href: 'link2',
-            text: 'texto link2',
-            file: 'C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\file1.md' },
-          { href: 'link3',
-            text: 'texto link3',
-            file: 'C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\file1.md' },
-          { href: 'link4',
-            text: 'texto link4',
+            [ { href: 'https://github.com/natalyJallo/lim-2018-11-bc-core-am-data-lo',
+            text: 'Node.js',
             file: 'C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\file1.md' },
           { href: 'https://es.wikipedia.org/wiki/Markdown',
             text: 'Markdown',
             file: 'C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\ji.md' } ])
     })
 });
+const resultValidate =[ { href: 'https://github.com/natalyJallo/lim-2018-11-bc-core-am-data-lo',
+text: 'Node.js',
+file: 'C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\file1.md',
+state: 404,
+message: 'fail' },
+{ href: 'https://es.wikipedia.org/wiki/Markdown',
+text: 'Markdown',
+file: 'C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a\\ji.md',
+state: 200,
+message: 'OK' } ]
+describe('validate',() => {
+    it('deberia ser una funcion',() => {
+        expect(typeof validate).toBe('function');
+    });
+    it('debería retornar un objeto con el estado del link y el texto',() => {
+   const resulPromisetaValidate = validate('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a')
+   return new Promise ((resolve,reject)=>{
+       resulPromisetaValidate.then((resp)=>{
+           expect(resp).toEqual(resultValidate)
+           resolve(resp);
+       })
+   })
+   
+})
+});
+describe('statLinks', () => {
+it('deberia retornar la cantidad de link que hay en un documento',() => {
+    const resultStatLinksTotal = statLinks('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a')
+    return new Promise ((resolve,reject)=>{
+        resultStatLinksTotal
+        .then((resp)=>{
+            expect(resp).toEqual([2,2])
+            resolve(resp)
+        })
+    .catch(error=>reject(error))
+});
+});
+});
+describe('statsLinksBroken', () => {
+        it('deberia retornar la cantidad de link que hay en un documento',() => {
+            const resultStatLinksTotal = statLinksBroken('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a')
+            return new Promise ((resolve,reject)=>{
+                resultStatLinksTotal
+                .then((resp)=>{
+                    expect(resp).toEqual(1)
+                    resolve(resp)
+                })
+            .catch(error=>reject(error))
+        });
+        });
+        });

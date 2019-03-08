@@ -37,39 +37,42 @@ export const travelDirectory = (pathToWalk) => {
 export const filterPathWithExtensionMd = (pathArr) => {
     return pathArr.filter(file => path.extname(file) === '.md')
 }
-export const concatPath = (fileName) => {
-    return path.join(__dirname,fileName)
-}
+
 /** */
 /**
  * Obtienes las propiedades de los links dentro de los documentos MD
- * @param {rutas a archivos MD} pathsMdArr
+ * @param {rutas a archivos MD} paths
  * @returns un array de objetos que contienene las propiedades de los links: path, href, title, text
  */
-export const getPropertiesOfDocumentMd = (pathsMdArr) => {
-    const arrFileName = travelDirectory(pathsMdArr)
+export const getPropertiesOfDocumentMd = (paths) => {
+    const arrFileName = travelDirectory(paths)
     const arrFilterFiles = filterPathWithExtensionMd(arrFileName)
     let reg = /((^|[^!])\[(.*)\])\S+/gm;
     let obj = [];
     const expRegtitle = /\[((.*))\]/gm;
     const hlinks = /\((.*)\)/gm;
     arrFilterFiles.forEach(pathFile => {
-        let getTexto = fs.readFileSync(pathFile, 'utf-8');
-        let resultadoReg = getTexto.match(reg).toString();
-        let getTitle = resultadoReg.match(expRegtitle).toString();
-        let hlink = resultadoReg.match(hlinks).toString();
-        const arrTitle = getTitle.split(',')
-        const arrHlink = hlink.split(',')
-        arrTitle.forEach((e,i)=>
-            obj.push(
+            let getTexto = fs.readFileSync(pathFile, 'utf-8');
+           if(!getTexto.match(reg)){
+               console.log(`No se encontraron links en ${pathFile}`)
+           }else{
+            let resultadoReg = getTexto.match(reg).toString();
+            let getTitle = resultadoReg.match(expRegtitle).toString();
+            let hlink = resultadoReg.match(hlinks).toString();
+            const arrTitle = getTitle.split(',')
+            const arrHlink = hlink.split(',')
+            arrTitle.forEach((title,position)=>
+                obj.push(
                 {
-                    href:arrHlink[i].substring(1,arrHlink[i].length-1),
-                    text :arrTitle[i].substring(1,arrTitle[i].length-1),
+                    href:arrHlink[position].substring(1,arrHlink[position].length-1),
+                    text :(arrTitle[position].substring(1,arrTitle[position].length-1)).slice(0,50),
                     file : pathFile                    
                 }
             )
         )
-       
-    })
-return obj
+        }
+           } 
+    )
+ return obj
 }
+// console.log(getPropertiesOfDocumentMd('C://Users//Usuario//Documents//ProjectsLaboratoria//LIM008-fe-md-links//test//testFolder//folder1//folder1a//'))
