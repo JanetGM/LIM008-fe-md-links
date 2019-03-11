@@ -21,7 +21,7 @@ if (args.length === 2) {
   
   if (args[1] === '--stats') {
     options.stats = true;
-    statLinks(args[0]).then(resp => console.log(resp))
+    statLinks(args[0]).then(resp => console.log(resp));
   }
 }
 
@@ -31,6 +31,6 @@ if (args.length === 3) {
     options.validate = true;
     options.stats = true;
     const promiseStats = [statLinksBroken(args[0]), statLinks(args[0]) ];
-    Promise.all(promiseStats).then(resp => console.log(resp));
+    Promise.all(promiseStats).then(resp => (resp.forEach(result => console.log(result))));
   }    
 }
