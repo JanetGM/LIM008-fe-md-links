@@ -1,22 +1,32 @@
 {
-  "name": "@JanetGM/mdLinks",
-  "version": "1.0.0",
-  "description": "Social Network @ Laboratoria",
-  "main": "src/index.html",
+  "name": "md-links",
+  "version": "1.8.0",
+  "description": "md-links",
+  "main": "lib/controller/index.js",
   "keywords": [
     "javascript",
     "npm",
-    "jest"
+    "jest",
+    "md-links"
   ],
   "license": "MIT",
+  "bugs":{
+    "url": "https://github.com/JanetGM/LIM008-fe-md-links/issues"
+  },
   "bin": {
     "md-links": "lib/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JanetGM/LIM008-fe-md-links.git"
   },
   "scripts": {
     "build": "babel src -d lib",
     "eslint": "eslint --ext .js src/ test/",
     "test": "jest --coverage"
   },
+  "homepage": "https://github.com/JanetGM/LIM008-fe-md-links#readme",
+  "author": "Janet Gutierrez Montalban",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",

@@ -76,6 +76,6 @@ export const getPropertiesOfDocumentMd = (paths) => {
     }
   } 
   );
-  return obj;
+  return obj ;
 };
 // console.log(getPropertiesOfDocumentMd('C://Users//Usuario//Documents//ProjectsLaboratoria//LIM008-fe-md-links//test//testFolder//folder1//folder1a//'))

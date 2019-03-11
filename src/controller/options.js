@@ -16,7 +16,7 @@ export const validateLinks = (root) => {
           resolve(links);
         }
       }).catch((error) => {
-        links.state = 'no es url';
+        links.state = '404 no found';
         links.message = 'fail';
         resolve(links);
       }      

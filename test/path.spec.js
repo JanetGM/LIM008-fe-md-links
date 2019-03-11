@@ -1,5 +1,5 @@
 import {readDirectory, filterPathWithExtensionMd, getPropertiesOfDocumentMd, convertPathRelToAbs, concatPath, travelDirectory} from '../src/controller/path.js';
-import {validateLinks, statLinksBroken, statLinks, statLinksUnique} from '../src/controller/options.js';
+import {validateLinks, statLinksBroken, statLinks} from '../src/controller/options.js';
 import { resolve } from 'path';
 describe('convertPathRelToAbs', () => {
   it('debería ser una función', () => {
@@ -108,8 +108,25 @@ describe('validateLinks', () => {
     return new Promise((resolve, reject) => {
       resulPromisetaValidate.then((resp) => {
         expect(resp).toEqual(resultValidate);
-        resolve(resp);
-      });
+        resolve(resulPromisetaValidate);
+      }).catch(error => reject(error));
+    });
+  });
+  it('debería retornar un objeto con el estado undefined y fail', () => {
+    const resulPromisetaValidate = validateLinks(`${process.cwd()}\\test\\testFolder\\folder1\\folder1a`);
+    const resultValidateUrl =
+    ['Path : C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\prove.md'
+      , 'Link : www.gfsahksad.com || undefined || fail',
+      'Title : link'];
+    return new Promise((resolve, reject) => {
+      resulPromisetaValidate.then((links) => {
+        resolve(resulPromisetaValidate);
+      }).catch(error => {
+        console.log('ya entro');
+        expect(error).toEqual(resultValidateUrl);
+        resolve(links);
+      }
+      );
     });
   });
 });
@@ -120,7 +137,7 @@ describe('statLinks', () => {
       resultStatLinksTotal
         .then((resp) => {
           expect(resp).toEqual('Total : 6 Unique: 3');
-          resolve(resp);
+          resolve(resultStatLinksTotal);
         })
         .catch(error => reject(error));
     });
@@ -133,7 +150,7 @@ describe('statsLinksBroken', () => {
       resultStatLinksTotal
         .then((resp) => {
           expect(resp).toEqual('Broken: 3');
-          resolve(resp);
+          resolve(resultStatLinksTotal);
         })
         .catch(error => reject(error));
     });
