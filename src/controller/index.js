@@ -6,17 +6,18 @@ const options = {
   validate: true,
   stats: true
 };
+
 export const mdLinks = (root, options) => {
   // cuando los dos son falsos
   if (!options.validate && !options.stats) {
-    return console.log(getPropertiesOfDocumentMd(root));
+    const objectLinks = getPropertiesOfDocumentMd(root);
+    return objectLinks.map(resp => console.log(` Path : ${resp.file}\n Link : ${resp.href}\n Title : ${resp.text}\n`));
   } 
   if (!options.validate && options.stats) {
     return statLinks(root).then(resp => console.log(resp));
   } 
   if (options.validate && !options.stats) {
-    console.log('calcular el valor los links validados');
-    return validateLinks(root).then(resp => console.log(resp));
+    return validateLinks(root).then(resp => resp.map(links => console.log(` Path : ${links.file}\n Link : ${links.href}${links.state}${links.text}\n Title : ${links.text}\n`)));
   } 
   if (options.validate && options.stats) {
     const magia = [statLinksBroken(root), statLinks(root)];

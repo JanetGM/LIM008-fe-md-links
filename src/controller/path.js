@@ -13,16 +13,20 @@ export const convertPathRelToAbs = (pathRelative) => {
 
 export const travelDirectory = (pathToWalk) => {
   let arrFileName = [];
-  const readDirectory = fs.readdirSync(pathToWalk);
-  readDirectory.forEach((filesName) => {
-    const absFileName = path.join(pathToWalk, filesName);
-    const statss = fs.statSync(absFileName);
-    if (statss.isDirectory()) {
-      arrFileName = arrFileName.concat(travelDirectory(absFileName));
-    } else {
-      arrFileName.push(absFileName);
-    }
-  });
+  if (path.extname(pathToWalk) === '.md') {
+    arrFileName.push(pathToWalk);
+  } else {
+    const readDirectory = fs.readdirSync(pathToWalk);
+    readDirectory.forEach((filesName) => {
+      const absFileName = path.join(pathToWalk, filesName);
+      const statss = fs.statSync(absFileName);
+      if (statss.isDirectory()) {
+        arrFileName = arrFileName.concat(travelDirectory(absFileName));
+      } else if (statss.isFile) {
+        arrFileName.push(absFileName);
+      }
+    });    
+  }
   return arrFileName;
 };
 
