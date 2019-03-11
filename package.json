@@ -14,7 +14,7 @@
     "url": "https://github.com/JanetGM/LIM008-fe-md-links/issues"
   },
   "bin": {
-    "md-links": "lib/cli.js"
+    "md-links": "./lib/cli.js"
   },
   "repository": {
     "type": "git",
