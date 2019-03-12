@@ -19,7 +19,7 @@ Esta es una librería desarrollada con Javascript y node.js , la cual nos permit
 
 ## Instalación 
 ```
- npm i @janetgutierrezmontalban/md-links
+ npm i JanetGM/LIM008-fe-md-links
 ```
 ```
 En la terminal : 
