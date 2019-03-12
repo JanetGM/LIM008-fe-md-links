@@ -20,3 +20,4 @@ export const mdLinks = (root, options) => {
     });
   }
 };
+// mdLinks('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\src\\controller',{validate:false}).then(resp => console.log(resp));
