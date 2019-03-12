@@ -25,8 +25,6 @@ export const validateLinks = (root) => {
   return Promise.all(recorreLinks);
 };
 
-
-
 export const statLinks = (paths) => { 
   const validateArr = validateLinks(paths);
   return new Promise((resolve, reject) => {

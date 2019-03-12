@@ -12,7 +12,7 @@ export const mdLinks = (root, options) => {
   }
   // cuando los dos son falsos
   if (options.validate) {
-    return validateLinks(root);
+    return validateLinks(root).then(response => response).catch(error => error);
   } 
   if (options.validate === false) {
     return new Promise((resolve) => {
