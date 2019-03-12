@@ -13,9 +13,9 @@ Esta es una librería desarrollada con Javascript y node.js , la cual nos permit
 
 ## Implementación
 - Diagrama de Flujo
-![imagen](img\flujo.png)
+![imagen](\img\flujo.png)
 - Planificación en GitHub con el uso de Project-milestone-issues
-![imagen](img\tablero.png)
+![imagen](\img\tablero.png)
 
 ## Instalación 
 ```
