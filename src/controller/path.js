@@ -62,13 +62,13 @@ export const getPropertiesOfDocumentMd = (paths) => {
       let resultadoReg = getTexto.match(reg).toString();
       let getTitle = resultadoReg.match(expRegtitle).toString();
       let hlink = resultadoReg.match(hlinks).toString();
-      const arrTitle = getTitle.split(',');
+      const arrTitle = getTitle.split(',')
       const arrHlink = hlink.split(',');
       arrTitle.forEach((title, position) =>
         obj.push(
           {
-            href: arrHlink[position].substring(1, arrHlink[position].length - 1),
-            text: (arrTitle[position].substring(1, arrTitle[position].length - 1)).slice(0, 50),
+            href: arrHlink[position].split((/[\(\)]/))[1],
+            text: (arrTitle[position].split(/[\[\]]/))[1].slice(0, 50),
             file: pathFile                    
           }
         )
