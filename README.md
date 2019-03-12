@@ -2,6 +2,7 @@
 
 ## Índice
 * [Descripción](#descripción)
+* [Implementación](#implementación)
 * [Instalación](#instalación)
 * [Guía_de_Uso](#guía-de-uso)
 
@@ -10,6 +11,11 @@ Esta es una librería desarrollada con Javascript y node.js , la cual nos permit
 
 ![imagen](/img/consola.png)
 
+## Implementación
+- Diagrama de Flujo
+![imagen](img\flujo.png)
+- Planificación en GitHub con el uso de Project-milestone-issues
+![imagen](img\tablero.png)
 
 ## Instalación 
 ```
@@ -24,35 +30,31 @@ md-links <path> <options>
  2. option : 
    
    . --validate : esta opción  valida si el link está activo o no
-   . --stats : estas opciones muestran estadisticas de los links(activos , rotos y unicos)
-   
 
 ```
+CLI (Línea de comandos)
+md-links <path> <options>
+Por ejemplo: Retorna las propiedades file, href y text
 
-### `README.md`
-
-- [ ] Colocar el *pseudo codigo* o *diagrama de flujo* con el algoritmo que
-  soluciona el problema.
-- [ ] Un board con el backlog para la implementación de la librería.
-- [ ] Documentación técnica de la librería.
-- [ ] Guía de uso e instalación de la librería
-
-### API `mdLinks(path, opts)`
-
-- [ ] El módulo exporta una función con la interfaz (API) esperada.
-- [ ] Implementa soporte para archivo individual
-- [ ] Implementa soporte para directorios
-- [ ] Implementa `options.validate`
-
-### CLI
-
-- [ ] Expone ejecutable `md-links` en el path (configurado en `package.json`)
-- [ ] Se ejecuta sin errores / output esperado
-- [ ] Implementa `--validate`
-- [ ] Implementa `--stats`
-
-### Pruebas / tests
-
-- [ ] Pruebas unitarias cubren un mínimo del 70% de statements, functions,
-  lines, y branches.
-- [ ] Pasa tests (y linters) (`npm test`).
+$ md-links ./some/example.md
+./some/example.md http://algo.com/2/3/ Link a algo
+./some/example.md https://otra-cosa.net/algun-doc.html algún doc
+./some/example.md http://google.com/ Google
+Retorna las propiedades file, href, text, status y value
+```
+$ md-links ./some/example.md --validate
+./some/example.md http://algo.com/2/3/ ok 200 Link a algo
+./some/example.md https://otra-cosa.net/algun-doc.html fail 404 algún doc
+./some/example.md http://google.com/ ok 301 Google
+Retorna las propiedades total(cantidad total de links) y unique(cantidad de links unicos)
+````
+```
+$ md-links ./some/example.md --stats
+Total: 3
+Unique: 3
+Retorna las propiedades total(cantidad total de links) y unique(cantidad de links unicos) y broken cantidad de links inactivos)
+``` 
+$ md-links ./some/example.md --s --v
+Total: 3
+Unique: 3
+Broken: 1
