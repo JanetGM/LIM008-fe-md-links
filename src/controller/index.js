@@ -20,4 +20,3 @@ export const mdLinks = (root, options) => {
     });
   }
 };
-// mdLinks('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder',{validate:false}).then(resp => console.log(resp));
