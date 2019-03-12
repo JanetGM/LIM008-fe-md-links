@@ -2,7 +2,7 @@ import {convertPathRelToAbs, travelDirectory, getPropertiesOfDocumentMd} from '.
 import {validateLinks, statLinks, statLinksBroken} from '../controller/options.js';
 
 // const options = {
-//   validate :true
+//   validate: true
 // }
 export const mdLinks = (root, options) => {
   // cuando los dos son falsos
