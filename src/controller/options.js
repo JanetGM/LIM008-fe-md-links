@@ -26,9 +26,6 @@ export const validateLinks = (root) => {
 };
 
 
-// validateLinks('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a')
-// .then(resp => console.log(resp))
-// .catch(err => console.log(err))
 
 export const statLinks = (paths) => { 
   const validateArr = validateLinks(paths);
@@ -52,4 +49,3 @@ export const statLinksBroken = (paths) => {
   });
 };
 
-// statLinks('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a').then(resp=>console.log(resp)).catch(error=>console.log(error))

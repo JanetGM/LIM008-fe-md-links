@@ -6,7 +6,7 @@ const options = {
 };
 export const mdLinks = (root, options) => {
   if (!options) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       resolve(getPropertiesOfDocumentMd(root));
     });
   }
@@ -15,10 +15,8 @@ export const mdLinks = (root, options) => {
     return validateLinks(root);
   } 
   if (options.validate === false) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       resolve(getPropertiesOfDocumentMd(root));
     });
   }
 };
-// mdLinks('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a')
-//   .then(resp => console.log(resp));

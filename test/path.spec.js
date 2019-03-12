@@ -122,7 +122,6 @@ describe('validateLinks', () => {
       resulPromisetaValidate.then((links) => {
         resolve(resulPromisetaValidate);
       }).catch(error => {
-        console.log('ya entro');
         expect(error).toEqual(resultValidateUrl);
         resolve(links);
       }
