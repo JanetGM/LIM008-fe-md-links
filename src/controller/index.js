@@ -20,5 +20,5 @@ export const mdLinks = (root, options) => {
     });
   }
 };
-mdLinks('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a')
-  .then(resp => console.log(resp));
+// mdLinks('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a')
+//   .then(resp => console.log(resp));
