@@ -7,7 +7,7 @@ const options = {
 export const mdLinks = (root, options) => {
   if (!options) {
     return new Promise((resolve) => {
-      resolve(getPropertiesOfDocumentMd(root)).then(response => response).catch(error => error);
+      resolve(getPropertiesOfDocumentMd(root));
     });
   }
   // cuando los dos son falsos
@@ -16,7 +16,7 @@ export const mdLinks = (root, options) => {
   } 
   if (options.validate === false) {
     return new Promise((resolve) => {
-      resolve(getPropertiesOfDocumentMd(root)).then(response => response).catch(error => error);
+      resolve(getPropertiesOfDocumentMd(root));
     });
   }
 };
