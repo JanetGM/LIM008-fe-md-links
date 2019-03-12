@@ -50,7 +50,7 @@ export const filterPathWithExtensionMd = (pathArr) => {
 export const getPropertiesOfDocumentMd = (paths) => {
   const arrFileName = travelDirectory(paths);
   const arrFilterFiles = filterPathWithExtensionMd(arrFileName);
-  let reg = /((^|[^!])\[(.*)\])/gm;
+  let reg = /((^|[^!])\[(.*)\])\S+/gm;
   let obj = [];
   const expRegtitle = /\[((.*))\]/gm;
   const hlinks = /\((.*)\)/gm;
@@ -62,8 +62,8 @@ export const getPropertiesOfDocumentMd = (paths) => {
       let resultadoReg = getTexto.match(reg).toString();
       let getTitle = resultadoReg.match(expRegtitle).toString();
       let hlink = resultadoReg.match(hlinks).toString();
-      const arrTitle = getTitle.split(/[\[\]]/);
-      const arrHlink = hlink.split('/[\[\]]/');
+      const arrTitle = getTitle.split(',');
+      const arrHlink = hlink.split(',');
       arrTitle.forEach((title, position) =>
         obj.push(
           {
@@ -78,3 +78,4 @@ export const getPropertiesOfDocumentMd = (paths) => {
   );
   return obj ;
 };
+// console.log(getPropertiesOfDocumentMd('C://Users//Usuario//Documents//ProjectsLaboratoria//LIM008-fe-md-links//test//testFolder//folder1//folder1a//'))
