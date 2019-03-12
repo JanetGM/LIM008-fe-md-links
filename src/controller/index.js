@@ -10,7 +10,6 @@ export const mdLinks = (root, options) => {
       resolve(getPropertiesOfDocumentMd(root));
     });
   }
-  // cuando los dos son falsos
   if (options.validate) {
     return validateLinks(root).then(response => response).catch(error => error);
   } 

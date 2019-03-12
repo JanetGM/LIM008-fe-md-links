@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 
 export const validateLinks = (root) => {
   const getLinks = getPropertiesOfDocumentMd(root);
-  const recorreLinks = getLinks.map(links => new Promise((resolve, reject) => {
+  const arrObj = getLinks.map(links => new Promise((resolve) => {
     const href = fetch(links.href)
       .then(resp => {
         if (resp.status >= 200 && resp.status < 400) {
@@ -22,7 +22,7 @@ export const validateLinks = (root) => {
       }      
       );
   }));
-  return Promise.all(recorreLinks);
+  return Promise.all(arrObj);
 };
 
 export const statLinks = (paths) => { 
