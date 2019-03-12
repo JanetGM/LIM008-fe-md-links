@@ -1,9 +1,9 @@
 import {convertPathRelToAbs, travelDirectory, getPropertiesOfDocumentMd} from '../controller/path.js';
 import {validateLinks, statLinks, statLinksBroken} from '../controller/options.js';
 
-// const options = {
-//   validate: true
-// }
+const options = {
+  validate: true
+}
 export const mdLinks = (root, options) => {
   // cuando los dos son falsos
   if (options.validate) {
@@ -14,4 +14,4 @@ export const mdLinks = (root, options) => {
     });
   }
 };
-// mdLinks('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a', options).then(resp => console.log(resp))
+// mdLinks('C:\\Users\\Usuario\\Documents\\ProjectsLaboratoria\\LIM008-fe-md-links\\test\\testFolder\\folder1\\folder1a', {validate: false }).then(resp => console.log(resp))
