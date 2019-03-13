@@ -19,7 +19,7 @@ Esta es una librería desarrollada con Javascript y node.js , la cual nos permit
 
 ## Instalación
  ```
- npm install --global AlidaContreras/mdLinks
+ npm i JanetGM/LIM008-fe-md-links
  ```
 
 ## Guía de uso como módulo
