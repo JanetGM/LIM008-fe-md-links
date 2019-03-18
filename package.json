@@ -10,11 +10,8 @@
     "md-links"
   ],
   "license": "MIT",
-  "bugs":{
+  "bugs": {
     "url": "https://github.com/JanetGM/LIM008-fe-md-links/issues"
-  },
-  "bin": {
-    "md-links": "./lib/cli.js"
   },
   "repository": {
     "type": "git",
@@ -35,7 +32,9 @@
     "babel-jest": "^24.1.0",
     "eslint": "^5.10.0",
     "eslint-plugin-jest": "^22.1.2",
+    "fetch-mock": "^7.3.1",
     "jest": "^24.1.0",
+    "jest-fetch-mock": "^2.1.1",
     "regenerator-runtime": "^0.13.1"
   },
   "dependencies": {

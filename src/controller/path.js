@@ -1,4 +1,3 @@
-
 const path = require('path');
 const fs = require('fs');
 /**
@@ -6,11 +5,6 @@ const fs = require('fs');
  * @param {ruta relativa} pathsRelative 
  * @returns un string  con la rutas convertida a absoluta
  */
-export const convertPathRelToAbs = (pathRelative) => {
-  const absoluta = path.resolve(pathRelative);
-  return absoluta;
-}; 
-
 export const travelDirectory = (pathToWalk) => {
   let arrFileName = [];
   if (path.extname(pathToWalk) === '.md') {
@@ -21,24 +15,15 @@ export const travelDirectory = (pathToWalk) => {
       const absFileName = path.join(pathToWalk, filesName);
       const statss = fs.statSync(absFileName);
       if (statss.isDirectory()) {
-        arrFileName = arrFileName.concat(travelDirectory(absFileName));
+        arrFileName = [...arrFileName, ...(travelDirectory(absFileName))]; // concatenar con  ES6
       } else if (statss.isFile) {
-        arrFileName.push(absFileName);
+        if (path.extname(absFileName).toLowerCase() === '.md') {
+          arrFileName.push(absFileName);
+        }
       }
     });    
   }
   return arrFileName;
-};
-
-/**
- * Filtra las rutas pasadas como parametros,
- * quedándose solamente con aquellas que son MD
- * 
- * @param {array a filtrar} pathsArr 
- * @returns un array de rutas con extensión MD
- */
-export const filterPathWithExtensionMd = (pathArr) => {
-  return pathArr.filter(file => path.extname(file) === '.md');
 };
 
 /** */
@@ -49,12 +34,11 @@ export const filterPathWithExtensionMd = (pathArr) => {
  */
 export const getPropertiesOfDocumentMd = (paths) => {
   const arrFileName = travelDirectory(paths);
-  const arrFilterFiles = filterPathWithExtensionMd(arrFileName);
   let reg = /((^|[^!])\[(.*)\])\S+/gm;
   let obj = [];
   const expRegtitle = /\[((.*))\]/gm;
   const hlinks = /\((.*)\)/gm;
-  arrFilterFiles.forEach(pathFile => {
+  arrFileName.forEach(pathFile => {
     let getTexto = fs.readFileSync(pathFile, 'utf-8');
     if (!getTexto.match(reg)) {
       console.log(`No se encontraron links en ${pathFile}`);

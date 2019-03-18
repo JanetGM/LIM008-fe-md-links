@@ -9,11 +9,9 @@ export const mdLinks = (root, options) => {
     return new Promise((resolve) => {
       resolve(getPropertiesOfDocumentMd(root));
     });
-  }
-  if (options.validate) {
+  } else if (options.validate) {
     return validateLinks(root).then(response => response).catch(error => error);
-  } 
-  if (options.validate === false) {
+  } else if (options.validate === false) {
     return new Promise((resolve) => {
       resolve(getPropertiesOfDocumentMd(root));
     });
